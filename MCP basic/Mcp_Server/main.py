@@ -1,3 +1,10 @@
+"""
+Testing Your Resources
+You can test resources using the MCP Inspector. Start your server with:
+
+        `uv run mcp dev mcp_server.py`
+"""
+
 from mcp.server.fastmcp import FastMCP
 from fastapi import FastAPI
 mcp = FastMCP("DocumentMCP", log_level="ERROR")
@@ -14,37 +21,55 @@ docs = {
 
 
 # ✅ Tool: Read a document
-@mcp.tool(name="read_doc", description="Read the contents of a document by ID")
+@mcp.tool(
+        name="read_doc",
+        description="Read the contents of a document by ID"
+        )
 def read_doc(doc_id: str) -> str:
     return docs.get(doc_id, "Document not found.")
 
 # ✅ Tool: Edit a document
-@mcp.tool(name="edit_doc", description="Edit the contents of a document")
+@mcp.tool(
+        name="edit_doc",
+        description="Edit the contents of a document"
+        )
 def edit_doc(doc_id: str, new_content: str) -> str:
     if doc_id in docs:
         docs[doc_id] = new_content
         return f"Document '{doc_id}' updated successfully."
     return "Document not found."
 
-# # ✅ Resource: Return all doc IDs
-# @mcp.resource(name="list_doc_ids", description="List all available document IDs")
-# def list_doc_ids() -> list[str]:
-#     return list(docs.keys())
+# ✅ Resource: Return all doc IDs
+@mcp.resource(
+        "docs://documents",
+        mime_type="application/json"
+    )
+def list_doc_ids() -> list[str]:
+    return list(docs.keys())
 
-# # ✅ Resource: Return contents of a particular doc
-# @mcp.resource(name="get_doc_content", description="Get the content of a specific document")
-# def get_doc_content(doc_id: str) -> str:
-#     return docs.get(doc_id, "Document not found.")
+# ✅ Resource: Return contents of a particular doc
+@mcp.resource(
+        "docs://documents",
+        mime_type="application/json"
+        )
+def get_doc_content(doc_id: str) -> str:
+    return docs.get(doc_id, "Document not found.")
 
-# # ✅ Prompt: Rewrite a doc in markdown format
-# @mcp.prompt(name="rewrite_markdown", description="Rewrite given text into markdown format")
-# def rewrite_markdown(doc_text: str) -> str:
-#     return f"# Markdown Version\n\n{doc_text}"
+# ✅ Prompt: Rewrite a doc in markdown format
+@mcp.prompt(
+        name="rewrite_markdown",
+        description="Rewrite given text into markdown format"
+        )
+def rewrite_markdown(doc_text: str) -> str:
+    return f"# Markdown Version\n\n{doc_text}"
 
-# # ✅ Prompt: Summarize a doc
-# @mcp.prompt(name="summarize_doc", description="Summarize the document")
-# def summarize_doc(doc_text: str) -> str:
-#     return f"Summary: {doc_text[:50]}..." if len(doc_text) > 50 else f"Summary: {doc_text}"
+# ✅ Prompt: Summarize a doc
+@mcp.prompt(
+        name="summarize_doc",
+        description="Summarize the document"
+        )
+def summarize_doc(doc_text: str) -> str:
+    return f"Summary: {doc_text[:50]}..." if len(doc_text) > 50 else f"Summary: {doc_text}"
 
 # if __name__ == "__main__":
 #     mcp.run(transport="stdio")

@@ -89,7 +89,7 @@ Every server offers three kinds of things:
 | prompts/get  | Retrieve prompt details    | Full prompt definition with arguments |
 
 ---
-
+# Example 1
 ## 3. Imagine a Travel-Planning **Scenario**
 
 1. **User** clicks “Plan a Vacation” (`prompts/list` → `prompts/get` for “plan-vacation”).
@@ -111,6 +111,56 @@ All three building blocks work together:
 * **Resources** supplied calendar and weather context.
 * **Tools** performed actions (flight search, calendar event, email).
 
+
+# Example 2
+
+
+
+
+## 5. 📎 Real-World Scenario
+
+Let’s walk through a scenario to make it concrete ⭐:
+
+### Travel Planning Assistant Example
+
+1. **Server capabilities** include:
+
+   * A **static resource**: `file:///Documents/Passport.pdf`
+   * A **template resource**: `weather://forecast/{city}/{date}`
+   * **Tools**: `searchFlights`, `createCalendarEvent`, etc.
+   * **Prompts**: `plan-vacation`, `summary-meeting`
+
+2. **User visits travel app** and selects *“Plan a Vacation”* prompt. The app shows a form and fills in:
+
+   * Destination: `Barcelona`
+   * Dates: `2025-09-01` to `2025-09-08`
+   * Budget: `2000`
+   * Interests: `[“architecture”, “food”]`
+
+3. The app lists and fetches resources:
+
+   * `resources/list` → finds `calendar://my-calendar/Sep-2025`
+   * `resources/read` → gets your calendar entries
+   * `resources/read` → fetches `weather://forecast/Barcelona/2025-09-01`
+   * *(Optionally, subscribe to weather if planning interface updates in real-time)*
+
+4. AI uses these as context to suggest flight options and hotel choices.
+
+5. After AI asks for permission, tools are called:
+
+   * `tools/call` → `searchFlights(origin: "NYC", destination: "Barcelona", date: "2025-09-01")`
+   * Once you choose, `createCalendarEvent(...)`, `sendEmail(...)`, etc.
+
+6. If the weather resource updates (say new forecast), the server triggers a:
+
+   * `notifications/resources/updated`
+   * The client may automatically `resources/read` again and update suggestions.
+
+This flow ties together **Resources**, **Prompts**, and **Tools** beautifully to make a smart, context-aware system.
+
+**Resources** = 📂 Data your AI needs (read-only).
+
+
 ---
 
 ## 4. Why This Matters for Your Exam
@@ -118,5 +168,10 @@ All three building blocks work together:
 * **Tools** = “doers” (take action when AI asks).
 * **Resources** = “readers” (bring in data your AI needs).
 * **Prompts** = “guides” (give structured templates so users and AI don’t get lost).
+
+### 🎯 Think like this:
+**✅ Resource = notes you give to the LLM to read**
+
+**✅ Tool = calculator or action the LLM can use itself**
 
 Keep this story and the table in mind, and you’ll nail the MCP Server Concepts section! 😊

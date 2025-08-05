@@ -103,6 +103,9 @@
   * **Elicitation**: “Client, ask the user for more info (e.g. confirm ‘yes/no’).”
   * **Logging**: “Client, log this debug message.”
 
+
+
+
 ---
 
 ## 5. Notifications (Real-time Updates)
@@ -161,6 +164,25 @@
 4. The LLM inside your Agent now has **live weather data** whenever it needs it.
 
 ---
+
+**All methods**
+### 🧩 How They Work Together
+1. **Client** → initialize to start.
+
+2. **Server** → responds with declared capabilities.
+
+3. **Client** → calls tools/list, resources/list, and prompts/list.
+
+4. **LLM** picks a tool or prompt.
+
+5. **Client** → sends tools/call, resources/read, or prompts/get.
+
+6. **Server** → returns result (or error).
+
+7. **Server** may send notifications/tools/list_changed or resource change  notifications.
+
+8. **Option**ally, Server can ask client to sampling/complete, elicitation/request, or logging/.send.
+
 
 ### 🎓 Key Takeaways for Your Exam
 

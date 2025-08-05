@@ -6,6 +6,7 @@
 * Unlike resources (which just give data), tools let the assistant **execute code or APIs**.
 * 🧠 Tools are **called by the LLM**, not by your app. And you're in charge of approving or rejecting each call. ([modelcontextprotocol.io][1])
 
+
 ---
 
 ## 2. Key Properties of a Tool
@@ -144,13 +145,21 @@ This tool gives the student a **video**, **audio**, or **interactive content**.
 
 ```json
 {
-  "type": "iframe",
-  "iframe": {
-    "url": "https://interactive.python-course.com/lesson1",
-    "title": "Interactive Python Lesson"
+  "type": "resource",
+  "resource": {
+    "uri": "file:///project/src/main.rs",
+    "title": "Main Rust File",
+    "mimeType": "text/x-rust",
+    "text": "fn main() {\n    println!(\"Hello world!\");\n}",
+    "annotations": {
+      "audience": ["assistant"],
+      "priority": 0.8,
+      "lastModified": "2025-05-03T14:30:00Z"
+    }
   }
 }
 ```
+
 
 ---
 
@@ -172,30 +181,6 @@ This tool gives the student a **video**, **audio**, or **interactive content**.
 
 Let’s say you want to return a **video + text**. Your Python function might look like this:
 
-```python
-def show_learning_material(topic):
-    if topic == "python video":
-        return {
-            "type": "resource_link",
-            "resource_link": {
-                "url": "https://example.com/python-intro.mp4",
-                "title": "Intro to Python Programming"
-            }
-        }
-    elif topic == "python interactive":
-        return {
-            "type": "iframe",
-            "iframe": {
-                "url": "https://interactive.python-course.com/lesson1",
-                "title": "Interactive Python Lesson"
-            }
-        }
-    else:
-        return {
-            "type": "text",
-            "text": "Sorry, no content found for this topic."
-        }
-```
 
 ---
 
@@ -290,6 +275,7 @@ Tools give AI the ability to **do things**, not just talk. Some examples:
 > They make your assistant **interact with external systems or APIs**.
 > You remain in control for safety and reliability.
 
+["For more detail go to Panaversity github"](https://github.com/panaversity/learn-agentic-ai/tree/main/03_ai_protocols/01_mcp/04_fundamental_%20primitives/03_defining_tools)
 
 [1]: https://modelcontextprotocol.io/specification/2025-06-18/server/tools?utm_source=chatgpt.com "Tools - Model Context Protocol"
 [2]: https://gofastmcp.com/python-sdk/fastmcp-server-server?utm_source=chatgpt.com "fastmcp.server"

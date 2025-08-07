@@ -12,8 +12,12 @@ docs = {
     "docs://documents",
     mime_type="application/json",
     name="list_docs",
-    description="List all available documents with their names and descriptions"
-)
+    description="List all available documents with their names and descriptions",
+#     annotations={
+#         "audience": ["user", "assistant"],  # Both can access
+#         "priority": 0.8
+#     }
+ )
 def list_docs() -> list[str]:
     return list(docs.keys())
 

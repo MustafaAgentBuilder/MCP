@@ -13,11 +13,11 @@ headers = {
 
 body = {
     "jsonrpc": "2.0",
-    "method": "resources/read",
+    "method": "resources/list",
     "id": 1,
     "params": {
         "cursor": None,
-        "uri": "user://get_user_info/user_3",
+        "uri": "user://get_user_info/user_1",
     },
 }
 response = requests.post(url, json=body, headers=headers)

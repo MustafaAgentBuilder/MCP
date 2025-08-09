@@ -16,11 +16,11 @@ class MCPClient:
         
     async def __aenter__(self):
         print("[MCPClient] Opening session...")  # log: session opening
-        read, write, _ = await self.stack.enter_async_context(
+        receive , send   = await self.stack.enter_async_context(
             streamablehttp_client(self.url)
         )
         self._sess = await self.stack.enter_async_context(
-            ClientSession(read, write)
+            ClientSession(receive , send)
         )
         await self._sess.initialize()
         print("[MCPClient] Session opened.")     # log: session ready

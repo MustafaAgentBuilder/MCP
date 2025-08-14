@@ -6,7 +6,7 @@ mcp =FastMCP(
 
     name ="Lifecycle Testing",
     stateless_http = False,
-    json_response = True
+    # json_response = True
 )
 
 

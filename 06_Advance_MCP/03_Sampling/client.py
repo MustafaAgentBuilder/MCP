@@ -7,6 +7,47 @@ from mcp.types import CreateMessageRequestParams, CreateMessageResult, ErrorData
 from mcp.shared.context import RequestContext
 
 
+
+"""
+context: RequestContext["ClientSession", Any]
+
+This is the connection info between client and server.
+
+It tells the function who is asking and where to send the reply.
+
+RequestContext is a special MCP object that contains:
+
+Session info (who you’re connected to)
+
+Request ID (to link the reply to the right request)
+
+Any extra metadata
+
+"ClientSession" here means it’s a context for a client-side session.
+
+Any means it can have extra data of any type.
+
+params: CreateMessageRequestParams
+
+This holds all the details about the text generation request.
+
+Think of it like:
+
+"Here are the instructions for the AI: use these messages, maybe a system prompt, model hints, temperature, etc."
+
+params contains:
+
+params.messages → the conversation so far (list of messages from user, system, etc.)
+
+params.model (optional) → which model to use
+
+params.sampling_parameters (optional) → controls randomness, length, etc.
+
+Any other settings the server sent.
+
+"""
+
+
 async def mock_sampler(context: RequestContext["ClientSession", Any], params: CreateMessageRequestParams) -> CreateMessageResult | ErrorData:
     """A mock LLM handler that gets called by the ClientSession when the server sends a 'sampling/create' request."""
 

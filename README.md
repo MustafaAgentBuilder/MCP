@@ -135,3 +135,5 @@ In short, this move positions OpenAI as a leader in AI interoperability and sets
 - [JSON-RPC 2.0 Specification](https://www.jsonrpc.org/specification) - Foundation protocol
 - [OAuth 2.1 Security](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-v2-1) - Authentication framework
 - [Anthropic's MCP Announcement](https://www.anthropic.com/news/model-context-protocol) - Original introduction
+
+### [🎥 If you want to see videos, click me](https://www.youtube.com/watch?v=BiBqR2FtW4E&list=PLyjQWlylgnG0HyEYRxVZ8Y5xIUh6pGUxB&index=7)

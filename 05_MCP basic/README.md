@@ -153,3 +153,5 @@ After completing this module, you'll be ready to explore:
 3. **Use the Inspector**: Test your servers thoroughly with the MCP Server Inspector
 4. **Build Incrementally**: Start simple and add complexity gradually
 5. **Document Your Learning**: Keep notes on patterns and best practices you discover
+
+### [🎥 If you want to see videos, click me](https://www.youtube.com/watch?v=BiBqR2FtW4E&list=PLyjQWlylgnG0HyEYRxVZ8Y5xIUh6pGUxB&index=7)

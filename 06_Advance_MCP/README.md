@@ -174,3 +174,6 @@ After completing this module, you'll be ready to explore:
 ---
 
 **Ready to begin?** Start with [Lesson 01: Sampling - Giving Tools a Brain](01_sampling/README.md) to learn how to build AI-powered MCP servers! 
+
+---
+### [🎥 If you want to see videos, click me](https://www.youtube.com/watch?v=BiBqR2FtW4E&list=PLyjQWlylgnG0HyEYRxVZ8Y5xIUh6pGUxB&index=7)

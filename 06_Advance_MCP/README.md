@@ -173,6 +173,144 @@ After completing this module, you'll be ready to explore:
 
 ---
 
+# ⚡ MCP Features in Stateless vs Stateful
+
+## 1. 🌳 Roots
+
+* **What it is:** Roots = server’s “directory” (tools, resources, prompts). Client uses them to know what server can do.
+* **Stateless (True):**
+
+  * Roots must be re-fetched every time a client connects.
+  * No updates remembered between requests.
+  * ✅ Advantage: Very simple, no session storage.
+  * ❌ Disadvantage: Extra network calls, no persistent updates.
+* **Stateful (False):**
+
+  * Roots are stored in session.
+  * If server updates roots, client can be notified without re-fetch.
+  * ✅ Advantage: Efficient for long-lived clients, dynamic updates.
+  * ❌ Disadvantage: Needs session management (slightly more complex).
+* **Best for:**
+
+  * Stateless → simple one-off clients.
+  * Stateful → long-lived apps (e.g. IDE plugins).
+
+---
+
+## 2. 🎲 Sampling
+
+* **What it is:** Server may sample model outputs or behaviors.
+* **Stateless:**
+
+  * Each sampling call is independent.
+  * No memory of previous samples.
+  * ✅ Advantage: Predictable, safe for APIs.
+  * ❌ Disadvantage: Cannot build multi-turn sampling sessions.
+* **Stateful:**
+
+  * Sampling can be chained across turns in a session.
+  * ✅ Advantage: Context-aware sampling (useful for chatbots, multi-step inference).
+  * ❌ Disadvantage: Requires server to keep session state.
+* **Best for:**
+
+  * Stateless → one-shot completions.
+  * Stateful → conversational or iterative tasks.
+
+---
+
+## 3. 🧩 Elicitation
+
+* **What it is:** Asking client for additional input (like "give me username").
+* **Stateless:**
+
+  * Harder, because there’s no ongoing session.
+  * Each elicitation must restart context.
+  * ✅ Advantage: Simple prompt-response APIs.
+  * ❌ Disadvantage: No smooth back-and-forth.
+* **Stateful:**
+
+  * Natural multi-step elicitation supported (server can ask, client can answer).
+  * ✅ Advantage: Great for interactive apps and agents.
+  * ❌ Disadvantage: More complexity in error recovery.
+* **Best for:**
+
+  * Stateless → quick, single questions.
+  * Stateful → conversational workflows.
+
+---
+
+## 4. 📜 Logging
+
+* **What it is:** Server sends logs (debug, info, error, etc.).
+* **Stateless:**
+
+  * Logging is limited. Each request has only local logs.
+  * No continuous log stream.
+  * ✅ Advantage: Very light overhead.
+  * ❌ Disadvantage: Can’t see history of logs.
+* **Stateful:**
+
+  * Persistent logging channel per session.
+  * ✅ Advantage: Full history + real-time updates.
+  * ❌ Disadvantage: Requires session ID & tracking.
+* **Best for:**
+
+  * Stateless → small, simple services.
+  * Stateful → debugging, long-lived apps, monitoring.
+
+---
+
+## 5. 📈 Progress
+
+* **What it is:** Server reports progress of a long-running task (like training or file upload).
+* **Stateless:**
+
+  * Very limited. Since no session, progress updates are lost after request ends.
+  * ✅ Advantage: Works for short tasks (just return final result).
+  * ❌ Disadvantage: Can’t stream progress (e.g. 30%, 60%, done).
+* **Stateful:**
+
+  * Progress events tied to session.
+  * ✅ Advantage: Client gets updates as they happen.
+  * ❌ Disadvantage: Needs session channel to stay open.
+* **Best for:**
+
+  * Stateless → only short or atomic jobs.
+  * Stateful → long-running jobs (training, downloads, indexing).
+
+---
+
+# 🏆 Summary Table
+
+| Feature     | Stateless ✅               | Stateful ✅                 | Best Use Case           |
+| ----------- | ------------------------- | -------------------------- | ----------------------- |
+| Roots       | Yes (re-fetch every time) | Yes (persistent + updates) | Stateful for IDE/tools  |
+| Sampling    | Yes (one-shot)            | Yes (multi-turn)           | Stateful for agents     |
+| Elicitation | Yes (basic Q/A)           | Yes (multi-step dialogs)   | Stateful for workflows  |
+| Logging     | Yes (per call)            | Yes (continuous stream)    | Stateful for monitoring |
+| Progress    | Yes (only final)          | Yes (stream updates)       | Stateful for long tasks |
+
+---
+
+# 🎯 Which One is Better?
+
+* **Stateless:**
+
+  * Best when you want **simplicity**, low server cost, one-off requests.
+  * Example: REST APIs, serverless calls.
+
+* **Stateful:**
+
+  * Best when you need **interaction, progress tracking, logging, or multi-turn context**.
+  * Example: IDE plugins, chat assistants, training dashboards.
+
+---
+
+👉 So, all five (Roots, Sampling, Elicitation, Logging, Progress) **work in both** modes.
+But **stateful makes them powerful**, while **stateless keeps them lightweight**.
+
+
+
 **Ready to begin?** Start with [Lesson 01: Sampling - Giving Tools a Brain](01_sampling/README.md) to learn how to build AI-powered MCP servers! 
 
 ---

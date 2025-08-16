@@ -7,7 +7,7 @@ from mcp import types
 # Create a simple MCP server
 mcp = FastMCP(
     name="Simple Logging Server",
-    stateless_http=True  
+    stateless_http=False
 )
 
 

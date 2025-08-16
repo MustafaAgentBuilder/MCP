@@ -46,7 +46,7 @@ async def main():
 
                 print("\nSCENARIO 2: Processing with failure")
                 print("-" * 40)
-                result = await session.call_tool("process_item", {"item_id": "item-456", "should_fail": True})
+                result = await session.call_tool("process_item", {"item_id": "item-456", "should_fail":True})
                 if result.content:
                     print(f"✅ Result: {result.content[0].text}")
 

@@ -13,7 +13,7 @@ from mcp.types import TextContent
 # Initialize FastMCP server
 mcp = FastMCP(
     name="mcp-roots-server",
-    stateless_http=False
+    stateless_http=True
 )
 
 

@@ -5,7 +5,6 @@ import math
 
 mcp = FastMCP(
     name="Sampling Testing",
-    stateless_http=False
 )
 @mcp.tool()
 async def create_story(ctx: Context, topic: str) -> str:

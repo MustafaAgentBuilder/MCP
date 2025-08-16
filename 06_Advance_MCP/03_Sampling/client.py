@@ -89,8 +89,8 @@ async def main():
                 story_topic = "About skys"
                 print(f"-> Client: Calling 'create_story' tool with topic: '{story_topic}'")
 
-                tool_result = await session.call_tool("create_story", {"topic": story_topic})
                 new_tool = await session.list_tools()
+                tool_result = await session.call_tool("create_story", {"topic": story_topic})
 
                 print("-" * 50)
                 print(f"Tools Names {new_tool}\n\n\n")

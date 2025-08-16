@@ -33,6 +33,7 @@ async def create_story(ctx: Context, topic: str) -> str:
                 )
             ],
             max_tokens=100,
+            temperature =0.5, 
         )
 
         if result.content.type == "text":

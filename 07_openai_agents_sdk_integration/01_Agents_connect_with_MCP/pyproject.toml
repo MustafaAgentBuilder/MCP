@@ -1,0 +1,11 @@
+[project]
+name = "01-agents-connect-with-mcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=2.11.3",
+    "mcp>=1.13.0",
+    "openai-agents>=0.2.8",
+]

@@ -16,11 +16,11 @@ provider = AsyncOpenAI(
 )
 
 model = OpenAIChatCompletionsModel(
-    model = "gemini-2.0-flash",
+    model = "gemini-2.5-flash",
     openai_client= provider    
 )
 
-set_tracing_export_api_key("OPENAI_API_KEY")
+
 # set_tracing_disabled(True)
 # set_default_openai_api()
 
@@ -30,7 +30,7 @@ async def main_code():
     mcp_parms = MCPServerStreamableHttpParams(url = SERVER_URL)
     print(f"MCP SERVER URL -> {mcp_parms}")
 
-    async with MCPServerStreamableHttp(params = mcp_parms , name = "Agent Client" , cache_tools_list=True ) as agent_client:
+    async with MCPServerStreamableHttp(params = mcp_parms , name = "Agent Client",cache_tools_list =True ) as agent_client:
         print(f"MCPServerStreamableHttp Client Name {agent_client}")
         print("The SDK will use this client to interact with the MCP server.")
         print(f"Cache Tools List Enabled: {agent_client.cache_tools_list}")

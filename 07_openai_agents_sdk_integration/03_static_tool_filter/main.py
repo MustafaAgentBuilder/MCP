@@ -20,13 +20,13 @@ provider = AsyncOpenAI(
 )
 
 model = OpenAIChatCompletionsModel( 
-    model = "gemini-2.0-flash",
+    model = "gemini-2.5-flash",
     openai_client= provider    
 )
 
 # set_tracing_disabled(True)
 
-static_tool = create_static_tool_filter(allowed_tool_names=[],blocked_tool_names=[])
+static_tool = create_static_tool_filter(allowed_tool_names=["unit_converter"],blocked_tool_names=[""])
 async def main_code():
 
     #  These parameters tell the SDK how to reach the MCP server.

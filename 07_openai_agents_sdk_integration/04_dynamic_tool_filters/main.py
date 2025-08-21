@@ -12,8 +12,6 @@ load_dotenv()
 SERVER_URL =  "http://localhost:8000/mcp"
 
 
-set_tracing_export_api_key("Add OPENAI_API_KEY")
-
 provider = AsyncOpenAI(
     api_key=os.getenv("GEMINI_API_KEY"),
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
@@ -40,7 +38,7 @@ def custom_filter(context: ToolFilterContext, tool) -> bool:
 
 def context_aware_filter(context: ToolFilterContext, tool) -> bool:
     # Only allow tools for a specific agent
-    return context.agent.name == "User Assistant" and tool.name == "text_translator"
+    return context.agent.name == "User Assistant" and tool.name == "calculator"
 
 
 
@@ -51,7 +49,7 @@ async def main_code():
     mcp_parms = MCPServerStreamableHttpParams(url=SERVER_URL)
     print(f"MCP SERVER URL -> {mcp_parms}")
 
-    async with MCPServerStreamableHttp(params=mcp_parms, name="Agent Client", tool_filter=custom_filter) as agent_client:
+    async with MCPServerStreamableHttp(params=mcp_parms, name="Agent Client", tool_filter=context_aware_filter) as agent_client:
         print(f"MCPServerStreamableHttp Client Name {agent_client}")
         print("The SDK will use this client to interact with the MCP server.")
 

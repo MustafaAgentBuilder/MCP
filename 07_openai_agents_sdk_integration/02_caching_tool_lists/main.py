@@ -2,7 +2,7 @@ import asyncio
 import os
 from dotenv import load_dotenv, find_dotenv
 
-from agents import Agent, AsyncOpenAI, OpenAIChatCompletionsModel, Runner , set_tracing_disabled , enable_verbose_stdout_logging
+from agents import Agent, AsyncOpenAI, OpenAIChatCompletionsModel, Runner ,set_tracing_export_api_key,trace
 from agents.mcp import MCPServerStreamableHttp, MCPServerStreamableHttpParams
 
 
@@ -20,6 +20,7 @@ model = OpenAIChatCompletionsModel(
     openai_client= provider    
 )
 
+set_tracing_export_api_key("OPENAI_API_KEY")
 # set_tracing_disabled(True)
 # set_default_openai_api()
 
@@ -34,35 +35,47 @@ async def main_code():
         print("The SDK will use this client to interact with the MCP server.")
         print(f"Cache Tools List Enabled: {agent_client.cache_tools_list}")
         
-        # If cache_tools_list=True, the agent will reuse a cached list of tools for faster performance.  
-        # Call agent_client.invalidate_tools_cache() whenever tools on the server are added, removed, 
-        # or updated so the agent clears its cache and fetches the latest tool list from the server.
-        agent_client.invalidate_tools_cache()
+        # ✅ First fetch the tools list
+        tools_before = await agent_client.list_tools()
+        print(f"Initial Tools List: {[t.name for t in tools_before]}")
 
+        # ✅ Later check again if server tools changed
+        tools_after = await agent_client.list_tools()
+        print(f"Updated Tools List: {[t.name for t in tools_after]}")
+
+        # ✅ Compare lists → if changed, refresh the cache
+        if tools_before != tools_after:
+            print("⚡ Tools have been updated on server → Invalidating cache...")
+            agent_client.invalidate_tools_cache()
+        else:
+            print("✅ No changes in server tools. Cache is fine.")
 
 
         try:
-            assistant  =Agent(
-                name = "User Assistant",
-                instructions = "You are a Help Full assistant",
-                mcp_servers=[agent_client],
-                model = model
-            )
+            with trace("Tools Cache"):
+                assistant  =Agent(
+                    name = "User Assistant",
+                    instructions = "You are a Help Full assistant",
+                    mcp_servers=[agent_client],
+                    model = model
+                )
 
-            print(f"Agent '{assistant.name}' initialized with MCP server: '{agent_client.name}'.")
-            print("Check the logs of your shared_mcp_server for a 'tools/list' request.")
-
-
-            tools = await agent_client.list_tools()
-            tools = await agent_client.list_tools()
-            tools = await agent_client.list_tools()
-            print(f"Tools -> {tools}")
-
+            print("-------------First Agent Run------------------")
             result = await Runner.run(assistant , "My Name is Mustafa convert my name is to German language")
             print("RESULT",result.final_output)
+            print("-------------Second Agent Run-----------------")
+            result = await Runner.run(assistant , "Wha is 2*2+34-22")
+            print("RESULT",result.final_output)  
+            
+            print("-------------Third Agent Run------------------")
+            result = await Runner.run(assistant , "22 celsius convert into fahrenheit")
+            print("RESULT",result.final_output)    
 
+            print("--------------Fourth Agent---------------------")
+            result = await Runner.run(assistant , "Tell me about Pakistan Best Cricket Player ")
+            print("RESULT",result.final_output)
         except Exception as a:
-            print(f"An error occurred during agent setup or tool listing: {a}")    
+            print(f"An error occurred during agent setup or tool listing: {a}")
 
 
     print(f"MCPServerStreamableHttp client '{agent_client.name}' context exited.")
@@ -71,5 +84,3 @@ async def main_code():
 
 if __name__ == "__main__":
     asyncio.run(main_code())
-
-

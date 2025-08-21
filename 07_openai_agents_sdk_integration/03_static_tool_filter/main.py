@@ -2,13 +2,17 @@ import asyncio
 import os
 from dotenv import load_dotenv, find_dotenv
 
-from agents import Agent, AsyncOpenAI, OpenAIChatCompletionsModel, Runner , set_tracing_disabled , enable_verbose_stdout_logging
+from agents import Agent, AsyncOpenAI, OpenAIChatCompletionsModel, Runner , set_tracing_disabled , set_tracing_export_api_key
 from agents.mcp import MCPServerStreamableHttp, MCPServerStreamableHttpParams , create_static_tool_filter
 
 
+
 load_dotenv()
-enable_verbose_stdout_logging()
+# enable_verbose_stdout_logging()
 SERVER_URL =  "http://localhost:8000/mcp"
+
+
+
 
 provider = AsyncOpenAI(
     api_key=os.getenv("GEMINI_API_KEY"),
@@ -20,7 +24,7 @@ model = OpenAIChatCompletionsModel(
     openai_client= provider    
 )
 
-set_tracing_disabled(True)
+# set_tracing_disabled(True)
 
 static_tool = create_static_tool_filter(allowed_tool_names=[],blocked_tool_names=[])
 async def main_code():
@@ -29,7 +33,7 @@ async def main_code():
     mcp_parms = MCPServerStreamableHttpParams(url = SERVER_URL)
     print(f"MCP SERVER URL -> {mcp_parms}")
 
-    async with MCPServerStreamableHttp(params = mcp_parms , name = "Agent Client", tool_filter=static_tool) as agent_client:
+    async with MCPServerStreamableHttp(params = mcp_parms , name = "Agent Client", tool_filter =static_tool) as agent_client:
         print(f"MCPServerStreamableHttp Client Name {agent_client}")
         print("The SDK will use this client to interact with the MCP server.")
 
@@ -49,8 +53,8 @@ async def main_code():
 
             # tools = await agent_client.list_tools()
             # print(f"Tools -> {tools}")
-
-            result = await Runner.run(assistant , "What is 2*2+34-21*2 and who ca i say hi in German")
+            print("---------------------------------------------")    
+            result = await Runner.run(assistant , "What is 2*2+34-21*2 and My name  is Mustafa and I want to convert 100 celsius to fahrenheit and translate this text to french: Hello World")
             print("RESULT",result.final_output)
 
 

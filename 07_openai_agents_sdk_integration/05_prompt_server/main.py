@@ -13,6 +13,9 @@ client = AsyncOpenAI(
     base_url="https://generativelanguage.googleapis.com/v1beta/openai/",
 )
 
+
+
+
 async def main():
     params = MCPServerStreamableHttpParams(url=SERVER_URL)
     async with MCPServerStreamableHttp(params=params, name="MCP Prompt Server") as server:

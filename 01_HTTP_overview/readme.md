@@ -185,15 +185,20 @@ Content-Type: application/json
 
 ---
 
-### 🤖 **Why HTTP Matters in Agentic AI**
+## Use Cases in Agentic AI Systems (DACA Context)
 
-In modern AI systems (like agents talking to APIs), HTTP helps:
+HTTP, in its various versions (primarily HTTPS), is a cornerstone for communication in distributed agentic AI platforms like DACA:
 
-* Send/receive data between agents and tools
-* Talk to LLMs via REST APIs
-* Build dashboards (with FastAPI, Streamlit)
-* Use webhooks for events
-* Perform fast and secure communication
+- **API Communication**: The primary way agents interact with each other (A2A protocols), tools, services, and Large Language Models (LLMs).
+  - **RESTful APIs**: Widely used for their simplicity and statelessness, leveraging HTTP methods and status codes. MCP can be layered over HTTP.
+  - **gRPC**: Often uses HTTP/2 as its transport for efficient, strongly-typed inter-service communication.
+  - **GraphQL**: Provides a flexible query language for APIs, typically served over HTTP.
+- **Webhooks**: For event-driven communication, where agents receive notifications via HTTP POST requests when events occur in other systems.
+- **User Interfaces & Dashboards**: Serving web-based UIs (e.g., Streamlit, Next.js, FastAPI with HTML) for Human-in-the-Loop (HITL) interaction, monitoring, and configuration.
+- **Data Ingestion**: Agents fetching data from web pages (web scraping) or external APIs.
+- **Service Discovery & Health Checks**: Services within DACA (e.g., Dapr-enabled applications, Kubernetes pods) expose HTTP endpoints for discovery and health monitoring.
+
+The choice of HTTP version (HTTP/1.1, HTTP/2, or HTTP/3) for specific interactions within DACA will depend on factors like performance requirements, client/server capabilities, and network conditions. HTTP/2 and HTTP/3 are preferred for performance-sensitive, high-concurrency scenarios common in agentic systems.
 
 ---
 

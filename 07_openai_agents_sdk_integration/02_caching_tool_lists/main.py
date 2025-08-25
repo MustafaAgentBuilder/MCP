@@ -19,22 +19,7 @@ model = OpenAIChatCompletionsModel(
     model = "gemini-2.5-flash",
     openai_client= provider    
 )
-{
-  "mcpServers": {
-    "tavily-mcp": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "tavily-mcp"
-      ],
-      "env": {
-        "TAVILY_API_KEY": "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"
-      },
-      "disabled": false,
-      "autoApprove": []
-    }
-  }
-}
+
 
 # set_tracing_disabled(True)
 # set_default_openai_api()

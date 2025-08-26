@@ -1,5 +1,8 @@
 # Introduction to JSON-RPC 2.0
 
+**Note**
+* Very important for MCP Level 2 Quiz
+
 [Specification](https://www.jsonrpc.org/specification)
 
 ## Learn by Trying JSON-RPC Requests Online

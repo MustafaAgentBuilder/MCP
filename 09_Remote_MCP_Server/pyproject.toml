@@ -1,0 +1,13 @@
+[project]
+name = "09-remote-mcp-server"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.12.15",
+    "fastapi[standard]>=0.116.1",
+    "mcp>=1.13.1",
+    "requests>=2.32.5",
+    "uvicorn[standard]>=0.35.0",
+]

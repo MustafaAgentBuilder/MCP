@@ -192,4 +192,6 @@
 * **Primitives**: tools, resources, prompts (server → client) and sampling, elicitation, logging (client → server).
 * **Notifications** keep client & server in sync when things change.
 
-By understanding these pieces, you can both **build** MCP servers (with FastMCP or another SDK) and **write** MCP clients (in Python, Node.js, etc.) to integrate real-time tools into your AI agents. 
+
+**By understanding these pieces, you can both build MCP servers (with FastMCP or another SDK) and write MCP clients (in Python, Node.js, etc.), or even deploy your servers, to integrate real-time tools into your AI agents.** ✅
+

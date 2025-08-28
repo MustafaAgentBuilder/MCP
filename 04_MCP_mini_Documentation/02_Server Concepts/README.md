@@ -174,4 +174,3 @@ This flow ties together **Resources**, **Prompts**, and **Tools** beautifully to
 
 **✅ Tool = calculator or action the LLM can use itself**
 
-Keep this story and the table in mind, and you’ll nail the MCP Server Concepts section! 😊

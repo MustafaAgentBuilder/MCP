@@ -135,4 +135,3 @@ It tells:
 * **Roots** = Give tools safe file access.
 * **Initialize** = Setup the connection.
 
----

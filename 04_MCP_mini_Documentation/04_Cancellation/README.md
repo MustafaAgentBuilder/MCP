@@ -71,3 +71,4 @@ Imagine ordering food online 🍔.
 👉 So in simple words:
 **MCP Cancellation is a way for client or server to stop a running request by sending a cancel notification with the request ID. If it’s too late, just ignore it.**
 
+---

@@ -64,3 +64,4 @@ That’s exactly how **ping** works in MCP.
 👉 So in **1 line**:
 **MCP Ping = a small “are you alive?” check between client & server to keep connection healthy.** ✅
 
+---

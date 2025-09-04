@@ -82,7 +82,7 @@ Elicitation = The server’s way of politely saying:
 
 ---
 
-### Example of code
+### Example of code:
 
 ```json
 

@@ -1,7 +1,7 @@
 
 # 🟢 What is Completion in MCP?
 
-Think of it like **autofill / autocomplete** when you type something.
+**Think of it like **autofill / autocomplete** when you type something.**
 
 👉 In MCP:
 

@@ -94,7 +94,6 @@ Pagination is used for lists that can get **very big**:
 If the client sends a **bad cursor**, server replies with:
 `-32602 (Invalid params)` error.
 
----
 
 ✅ In **super simple words**:
 

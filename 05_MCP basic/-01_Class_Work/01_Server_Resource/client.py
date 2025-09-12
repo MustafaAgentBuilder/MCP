@@ -20,5 +20,7 @@ body = {
         "uri": "user://get_user_info/user_1",
     },
 }
+# Responce
+
 response = requests.post(url, json=body, headers=headers)
 print(response.text)

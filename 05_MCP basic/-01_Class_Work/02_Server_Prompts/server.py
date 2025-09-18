@@ -192,19 +192,6 @@ REVIEW FORMAT:
 """
 
 
-@mcp.prompt(
-    name="summarize",
-    description="Summarizes the contents of the document."
-)
-def summarize_document(doc_id: str = Field(description="Id of the document to summarize")) -> list:
-    from mcp.types import PromptMessage, TextContent
-    prompt_text = f"""
-    Your goal is to summarize the contents of the document.
-    Document ID: {doc_id}
-    Include a concise summary of the document's main points.
-    """
-    return [PromptMessage(role="assistant", content=TextContent(type="text", text=prompt_text))]
-
 
 
 mcp_app = mcp.streamable_http_app()

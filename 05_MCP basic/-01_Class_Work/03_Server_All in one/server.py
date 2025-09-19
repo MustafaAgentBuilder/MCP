@@ -16,7 +16,7 @@ def create_lesson_plan(subject: str, grade_level: str, duration: str) -> str:
         grade_level (str): What grade/age group
         duration (str): How long the lesson should be
     """
-    # Prompt adds educational expertise the user didn't specify
+
     return f"""Design a comprehensive lesson plan with these parameters:
 
 SUBJECT: {subject}

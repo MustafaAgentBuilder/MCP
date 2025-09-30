@@ -6,6 +6,8 @@ from typing import Any
 from pydantic import AnyUrl
 import json
 
+
+# MCP Client Implementation hardcoded 
 class MCPClient:
     def __init__(self, url):
         self.url = url                # attribute: server URL

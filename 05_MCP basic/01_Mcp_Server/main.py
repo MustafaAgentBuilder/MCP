@@ -1,4 +1,5 @@
 """
+MCP server:
 Testing Your Resources
 You can test resources using the MCP Inspector. Start your server with:
 

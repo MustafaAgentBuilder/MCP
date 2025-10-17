@@ -3,6 +3,7 @@ from mcp.client.streamable_http import streamablehttp_client  # HTTP transport f
 from contextlib import AsyncExitStack                  # Helper to clean up multiple async contexts
 import asyncio                                         # Python’s async I/O library
 
+# MCP Client class implementation hardcoded 
 class McpClient:
     def __init__(self, url):
         # Save the server URL and prepare a stack for cleanup

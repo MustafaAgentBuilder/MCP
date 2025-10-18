@@ -1,4 +1,4 @@
-# MCP Transports: How Agents and Servers Really Talk
+# MCP Transports: How Agents and Servers Really Talk in a Standard protocol
 
 ---
 
